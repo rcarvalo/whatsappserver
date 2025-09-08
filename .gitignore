@@ -1,0 +1,119 @@
+# ===========================
+# 🔐 FICHIERS SENSIBLES - PRIORITÉ MAXIMALE
+# ===========================
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+config/secrets.json
+
+# Variables d'environnement par plateforme
+.env.local
+.env.development
+.env.staging
+.env.production
+
+# Copies de sauvegarde contenant des secrets
+.env copy
+.env.backup
+.env.old
+
+# ===========================
+# 🐍 PYTHON
+# ===========================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ===========================
+# 🧪 ENVIRONNEMENTS VIRTUELS
+# ===========================
+.venv
+venv/
+ENV/
+env/
+.conda
+
+# ===========================
+# 📝 LOGS & DONNÉES
+# ===========================
+*.log
+logs/
+data/
+*.db
+*.sqlite3
+/embedding_processor.log
+/rag_searcher.log
+
+# ===========================
+# 🔧 IDE & ÉDITEURS
+# ===========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===========================
+# 🚀 DÉPLOIEMENT
+# ===========================
+.vercel
+.netlify
+
+# ===========================
+# 📦 DÉPENDANCES
+# ===========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===========================
+# 🧑‍💻 FICHIERS TEMPORAIRES
+# ===========================
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# ===========================
+# 📱 WHATSAPP SPÉCIFIQUE
+# ===========================
+whatsapp_sessions/
+*.session
+webhook_logs/
+
+# ===========================
+# 🗄️ BACKUP ET TESTS
+# ===========================
+backup/
+test_data/
+*.bak

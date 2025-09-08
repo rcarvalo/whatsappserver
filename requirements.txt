@@ -1,0 +1,23 @@
+# 🤖 WhatsApp RAG Server - Dependencies
+# Core FastAPI
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+
+# HTTP & Environment
+requests>=2.31.0
+python-dotenv>=1.0.0
+
+# Database & AI
+supabase>=2.0.0
+openai>=1.3.0
+
+# Telegram Bot
+python-telegram-bot>=20.6
+
+# Data Processing
+pandas>=2.1.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# Async & Files
+aiofiles>=23.2.1
