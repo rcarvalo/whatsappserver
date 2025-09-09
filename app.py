@@ -8,7 +8,7 @@ import os
 import sys
 import logging
 from datetime import datetime
-from typing import Dict, Any
+from typing import Dict, Any, List, Optional
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import PlainTextResponse, JSONResponse
@@ -291,7 +291,7 @@ def create_message_embedding_from_watch_info(
         search_metadata=_create_enhanced_search_metadata(normalized_watch, whatsapp_meta, semantic_meta)
     )
 
-def extract_whatsapp_messages(webhook_data: Dict[str, Any]) -> list:
+def extract_whatsapp_messages(webhook_data: Dict[str, Any]) -> List[Dict[str, Any]]:
     """Extrait les messages WhatsApp avec métadonnées enrichies du payload webhook"""
     messages = []
     
@@ -777,7 +777,7 @@ def _calculate_temporal_relevance() -> float:
     """Calcule la pertinence temporelle (messages récents plus pertinents)"""
     return 1.0  # Pour l'instant, tous les messages sont récents
 
-def _extract_social_context(whatsapp_meta: Dict) -> Dict[str, any]:
+def _extract_social_context(whatsapp_meta: Dict) -> Dict[str, Any]:
     """Extrait le contexte social"""
     context = {
         'is_group_conversation': whatsapp_meta.get('is_group_message', False) if whatsapp_meta else False,
