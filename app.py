@@ -28,6 +28,17 @@ logger = logging.getLogger(__name__)
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 # Imports pour l'extraction de montres
+
+
+# Variables d'environnement
+VERIFY_TOKEN = os.getenv('WHATSAPP_VERIFY_TOKEN', 'hellotesttoken')
+ACCESS_TOKEN = os.getenv('WHATSAPP_ACCESS_TOKEN')
+PHONE_NUMBER_ID = os.getenv('WHATSAPP_PHONE_NUMBER_ID')
+SUPABASE_URL = os.getenv('SUPABASE_URL')
+SUPABASE_KEY = os.getenv('SUPABASE_ANON_KEY')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+
 try:
     # Priorité à l'extracteur LLM
     if OPENAI_API_KEY:
@@ -42,15 +53,7 @@ try:
 except ImportError as e:
     logger.warning(f"⚠️ Extracteur de montres non disponible: {e}")
     watch_extractor = None
-
-# Variables d'environnement
-VERIFY_TOKEN = os.getenv('WHATSAPP_VERIFY_TOKEN', 'hellotesttoken')
-ACCESS_TOKEN = os.getenv('WHATSAPP_ACCESS_TOKEN')
-PHONE_NUMBER_ID = os.getenv('WHATSAPP_PHONE_NUMBER_ID')
-SUPABASE_URL = os.getenv('SUPABASE_URL')
-SUPABASE_KEY = os.getenv('SUPABASE_ANON_KEY')
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-
+    
 # Initialisation de l'application FastAPI
 app = FastAPI(
     title="🤖 WhatsApp RAG Server",
