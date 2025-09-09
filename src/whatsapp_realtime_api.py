@@ -537,11 +537,11 @@ class WhatsAppRealtimeAPI:
             from datetime import timedelta
             date_from = (datetime.now() - timedelta(days=days_back)).isoformat()
             
-            result = self.embedding_processor.supabase.table('conversations')\
+            result = self.embedding_processor.supabase.table('watch_conversations')\
                 .select('*')\
                 .eq('phone_number', self._normalize_phone_number(phone_number))\
-                .gte('timestamp', date_from)\
-                .order('timestamp', desc=False)\
+                .gte('message_timestamp', date_from)\
+                .order('message_timestamp', desc=False)\
                 .execute()
             
             return result.data if result.data else []

@@ -1,0 +1,224 @@
+<mxfile host="app.diagrams.net" modified="2024-01-15T10:30:00.000Z" agent="5.0">
+  <diagram name="Architecture Usage Client" id="client-usage">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Titre -->
+        <mxCell id="title" value="👥 Architecture d'Utilisation Client - WhatsApp RAG" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="20" width="500" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Section Utilisateurs -->
+        <mxCell id="users-section" value="👤 UTILISATEURS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="50" y="80" width="120" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Collectionneur -->
+        <mxCell id="collector" value="🏆 Collectionneur&#xa;&#xa;'Recherche une Rolex&#xa;Daytona Panda en bon état&#xa;budget 25-30k€'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="30" y="130" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Vendeur -->
+        <mxCell id="seller" value="💰 Vendeur&#xa;&#xa;'Cherche des infos sur&#xa;les prix actuels de&#xa;ma Submariner Hulk'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="30" y="230" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Expert -->
+        <mxCell id="expert" value="🔍 Expert&#xa;&#xa;'Analyse des tendances&#xa;du marché Rolex&#xa;sur les 3 derniers mois'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=center;" vertex="1" parent="1">
+          <mxGeometry x="30" y="330" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Telegram Bot Interface -->
+        <mxCell id="telegram-bot" value="🤖 Telegram Bot Interface&#xa;(telegram_rag_bot.py)&#xa;&#xa;📋 Commandes disponibles:&#xa;• /start - Démarrer&#xa;• /search - Recherche libre&#xa;• /brand - Par marque&#xa;• /price - Par gamme de prix&#xa;• /stats - Statistiques&#xa;• /help - Aide" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="280" y="130" width="220" height="150" as="geometry" />
+        </mxCell>
+
+        <!-- Exemples d'Interactions -->
+        <mxCell id="interaction-title" value="💬 EXEMPLES D'INTERACTIONS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="300" width="220" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="interaction1" value="👤: 'Rolex Submariner prix?'&#xa;🤖: 'Voici 5 Submariner trouvées:&#xa;     • 116610LN - 8500€ (très bon état)&#xa;     • 126610LV - 12500€ (neuf)&#xa;     • 14060M - 6800€ (vintage)'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;" vertex="1" parent="1">
+          <mxGeometry x="280" y="340" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="interaction2" value="👤: '/brand Omega budget 5000'&#xa;🤖: 'Omega dans votre budget:&#xa;     • Speedmaster Pro - 4200€&#xa;     • Seamaster Planet Ocean - 4800€&#xa;     📊 Tendance: Prix stables'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;align=left;" vertex="1" parent="1">
+          <mxGeometry x="280" y="440" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Section Backend -->
+        <mxCell id="backend-section" value="⚙️ BACKEND PROCESSING" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="80" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- RAG Searcher -->
+        <mxCell id="rag-searcher" value="🔍 RAG Searcher&#xa;&#xa;• Recherche sémantique&#xa;• Filtres avancés&#xa;• Ranking intelligent&#xa;• Similarité vectorielle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="580" y="130" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Database -->
+        <mxCell id="database-client" value="🗄️ Base de Données&#xa;(Supabase)&#xa;&#xa;• 1000+ messages analysés&#xa;• Métadonnées enrichies&#xa;• Index vectoriels&#xa;• Fonctions SQL custom" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="580" y="250" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Analytics Engine -->
+        <mxCell id="analytics" value="📊 Analytics Engine&#xa;&#xa;• Tendances de prix&#xa;• Statistiques de marché&#xa;• Analyses temporelles&#xa;• Insights automatiques" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="580" y="370" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Section Réponses -->
+        <mxCell id="responses-section" value="📋 TYPES DE RÉPONSES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="820" y="80" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Résultats de Recherche -->
+        <mxCell id="search-results" value="🔍 Résultats de Recherche&#xa;&#xa;📱 Format enrichi:&#xa;• Marque & Modèle&#xa;• Prix & Devise&#xa;• État & Accessoires&#xa;• Groupe d'origine&#xa;• Score de confiance" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="820" y="130" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Statistiques -->
+        <mxCell id="stats-response" value="📊 Statistiques&#xa;&#xa;📈 Données du marché:&#xa;• Prix moyen par marque&#xa;• Tendances temporelles&#xa;• Volume de transactions&#xa;• Groupes les plus actifs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="820" y="270" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Recommandations -->
+        <mxCell id="recommendations" value="💡 Recommandations&#xa;&#xa;🎯 Intelligence artificielle:&#xa;• Montres similaires&#xa;• Alertes de prix&#xa;• Opportunités d'investissement&#xa;• Conseils d'achat" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="820" y="410" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Flèches de flux -->
+        <mxCell id="arrow-users-bot" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="collector" target="telegram-bot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="170" />
+              <mxPoint x="240" y="180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow-users-bot2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="seller" target="telegram-bot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="270" />
+              <mxPoint x="240" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow-users-bot3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="expert" target="telegram-bot">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="240" y="370" />
+              <mxPoint x="240" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow-bot-rag" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="telegram-bot" target="rag-searcher">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow-rag-db" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="rag-searcher" target="database-client">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow-db-analytics" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="database-client" target="analytics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow-rag-results" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="rag-searcher" target="search-results">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="180" />
+              <mxPoint x="770" y="190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow-analytics-stats" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="analytics" target="stats-response">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="770" y="420" />
+              <mxPoint x="770" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow-analytics-reco" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="analytics" target="recommendations">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Labels -->
+        <mxCell id="label-requests" value="Requêtes&#xa;utilisateurs" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="200" y="200" width="60" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label-processing" value="Traitement&#xa;intelligent" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="520" y="150" width="60" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label-responses" value="Réponses&#xa;enrichies" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="770" y="120" width="60" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Flux de données -->
+        <mxCell id="data-flow-title" value="🔄 FLUX DE DONNÉES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="560" width="150" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-step1" value="1️⃣ Utilisateur envoie requête" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="600" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-step2" value="2️⃣ Bot analyse & interprète" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="210" y="600" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-step3" value="3️⃣ RAG recherche données" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="370" y="600" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-step4" value="4️⃣ Analyse & enrichissement" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="530" y="600" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-step5" value="5️⃣ Réponse personnalisée" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="690" y="600" width="140" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Flèches du flux -->
+        <mxCell id="flow-arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="flow-step1" target="flow-step2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="flow-step2" target="flow-step3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="flow-step3" target="flow-step4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="flow-step4" target="flow-step5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Performance & Features -->
+        <mxCell id="features-box" value="✨ FONCTIONNALITÉS CLÉS&#xa;&#xa;• Recherche en langage naturel&#xa;• Filtres automatiques intelligents&#xa;• Recommandations personnalisées&#xa;• Historique et favoris&#xa;• Alertes de prix&#xa;• Statistiques en temps réel&#xa;• Support multi-langues&#xa;• Interface conversationnelle" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="50" y="680" width="200" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="performance-box" value="⚡ PERFORMANCES&#xa;&#xa;• Réponse: &lt;2 secondes&#xa;• Base: 1000+ montres&#xa;• Précision: 95%+&#xa;• Disponibilité: 24/7&#xa;• Concurrent users: 100+&#xa;• Mises à jour: temps réel&#xa;• Cache intelligent&#xa;• Optimisation continue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="280" y="680" width="200" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="benefits-box" value="🎯 BÉNÉFICES UTILISATEUR&#xa;&#xa;• Gain de temps considérable&#xa;• Informations fiables et à jour&#xa;• Aide à la décision d'achat&#xa;• Découverte de nouvelles pièces&#xa;• Veille de marché automatisée&#xa;• Community insights&#xa;• Expertise accessible&#xa;• Interface simple et intuitive" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="510" y="680" width="200" height="140" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

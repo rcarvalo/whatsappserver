@@ -146,7 +146,7 @@ class RAGSearcher:
             if date_to:
                 rpc_params['date_to'] = date_to
             
-            result = self.supabase.rpc('match_conversations_advanced', rpc_params).execute()
+            result = self.supabase.rpc('search_watch_conversations', rpc_params).execute()
             
             if not result.data:
                 self.logger.info("Aucun résultat trouvé")
@@ -192,7 +192,7 @@ class RAGSearcher:
             self.logger.info(f"Recherche mots-clés: {keywords}" + (f" pour {phone_number}" if phone_number else ""))
             
             # Construire la requête SQL
-            query_builder = self.supabase.table('conversations').select('*')
+            query_builder = self.supabase.table('watch_conversations').select('*')
             
             if phone_number:
                 query_builder = query_builder.eq('phone_number', phone_number)
@@ -249,7 +249,7 @@ class RAGSearcher:
             Contexte de la conversation
         """
         try:
-            query_builder = self.supabase.table('conversations')\
+            query_builder = self.supabase.table('watch_conversations')\
                 .select('*')\
                 .eq('phone_number', phone_number)\
                 .order('timestamp', desc=False)

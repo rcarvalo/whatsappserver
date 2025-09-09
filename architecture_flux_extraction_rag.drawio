@@ -1,0 +1,163 @@
+<mxfile host="app.diagrams.net" modified="2024-01-15T10:00:00.000Z" agent="5.0">
+  <diagram name="Flux Extraction vers RAG" id="extraction-rag-flow">
+    <mxGraphModel dx="1422" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Titre -->
+        <mxCell id="title" value="🔄 Flux d'Information: Extraction LLM → RAG" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="400" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- 1. Message WhatsApp entrant -->
+        <mxCell id="whatsapp-message" value="📱 Message WhatsApp&#xa;&#xa;'Salut! Je vends ma Rolex&#xa;Submariner Hulk 116610LV&#xa;État neuf, boîte + papiers&#xa;Prix: 12500€ négociable'" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;align=center;" vertex="1" parent="1">
+          <mxGeometry x="50" y="100" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 2. Webhook Processing -->
+        <mxCell id="webhook-processing" value="🔗 Traitement Webhook&#xa;&#xa;• Extraction métadonnées WhatsApp&#xa;• Contexte de groupe&#xa;• Profil expéditeur&#xa;• Signaux d'intention" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="320" y="100" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 3. LLM Extractor -->
+        <mxCell id="llm-extractor" value="🤖 Extracteur LLM&#xa;(GPT-4o-mini)&#xa;&#xa;• Prompt structuré expert&#xa;• Contexte horlogerie&#xa;• JSON Schema strict&#xa;• Raisonnement explicable" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="560" y="100" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 4. Données Structurées -->
+        <mxCell id="structured-data" value="📊 Données Structurées&#xa;&#xa;• Marque: Rolex&#xa;• Modèle: Submariner&#xa;• Ref: 116610LV&#xa;• Prix: 12500€&#xa;• Accessoires: [box, papers]&#xa;• Confiance: 0.95" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="800" y="100" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 5. Enrichissement Métadonnées -->
+        <mxCell id="metadata-enrichment" value="✨ Enrichissement&#xa;Métadonnées&#xa;&#xa;• Mots-clés sémantiques&#xa;• Classification intentions&#xa;• Scores sentiment&#xa;• Contexte temporel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="50" y="280" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 6. Embedding Enrichi -->
+        <mxCell id="enhanced-embedding" value="🎯 Embedding Enrichi&#xa;&#xa;Texte original +&#xa;[GROUPE: Montres Premium]&#xa;[MARQUE: Rolex]&#xa;[INTENTION: VENTE]&#xa;[LANGUE: FRENCH]&#xa;→ Vector 1536D" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="290" y="280" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 7. Base de Données -->
+        <mxCell id="database" value="🗄️ Base de Données&#xa;(watch_conversations)&#xa;&#xa;• 25+ champs structurés&#xa;• Embedding vectoriel&#xa;• Index optimisés&#xa;• Métadonnées JSON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="550" y="280" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 8. Recherche RAG -->
+        <mxCell id="rag-search" value="🔍 Recherche RAG&#xa;&#xa;• Similarité vectorielle&#xa;• Filtres avancés&#xa;• Fonctions SQL custom&#xa;• Ranking intelligent" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="800" y="280" width="180" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- 9. Interface Utilisateur -->
+        <mxCell id="user-interface" value="🤖 Interface Utilisateur&#xa;(Telegram Bot)&#xa;&#xa;• Recherche naturelle&#xa;• Résultats enrichis&#xa;• Filtres intelligents&#xa;• Statistiques temps réel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="420" y="460" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Flèches de flux -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="whatsapp-message" target="webhook-processing">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="webhook-processing" target="llm-extractor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="llm-extractor" target="structured-data">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="structured-data" target="metadata-enrichment">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="250" />
+              <mxPoint x="140" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="metadata-enrichment" target="enhanced-embedding">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="enhanced-embedding" target="database">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="database" target="rag-search">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;strokeColor=#666666;" edge="1" parent="1" source="rag-search" target="user-interface">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="430" />
+              <mxPoint x="520" y="430" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Labels des flèches -->
+        <mxCell id="label1" value="Métadonnées&#xa;WhatsApp" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="270" y="130" width="60" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label2" value="Prompt +&#xa;Contexte" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="510" y="130" width="50" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label3" value="JSON&#xa;Structuré" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="750" y="130" width="50" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label4" value="Normalisation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="230" width="70" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label5" value="Mots-clés&#xa;Enrichis" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="320" width="50" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label6" value="Vector +&#xa;Métadonnées" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="500" y="320" width="50" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label7" value="Requêtes&#xa;Optimisées" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="750" y="320" width="50" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label8" value="Résultats&#xa;Intelligents" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="680" y="410" width="50" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Légende -->
+        <mxCell id="legend-title" value="🎯 Optimisations Clés" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="620" width="150" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend1" value="• Cache LLM: évite appels redondants" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="650" width="250" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend2" value="• Embedding enrichi: +50% précision recherche" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="670" width="250" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend3" value="• Index vectoriels: recherche <100ms" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="690" width="250" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend4" value="• Métadonnées JSON: filtrage avancé" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="50" y="710" width="250" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Performance Box -->
+        <mxCell id="perf-box" value="⚡ Performances&#xa;&#xa;• Extraction LLM: ~1s&#xa;• Cache hit: &lt;50ms&#xa;• Recherche RAG: &lt;100ms&#xa;• Précision: 90%+&#xa;• Coût: ~$0.0001/msg" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0f0f0;strokeColor=#666666;fontSize=11;align=left;" vertex="1" parent="1">
+          <mxGeometry x="800" y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

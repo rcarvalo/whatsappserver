@@ -21,12 +21,48 @@ class MessageEmbedding:
     id: Optional[int]
     phone_number: str
     message_content: str
-    timestamp: str
+    message_timestamp: str
     sender: str
     embedding: List[float]
     is_outgoing: bool
     media_type: Optional[str] = None
     content_hash: Optional[str] = None
+    
+    # 🕰️ NOUVEAUX CHAMPS POUR LES MONTRES
+    group_name: Optional[str] = None
+    message_type: str = 'general'
+    intent_score: float = 0.0
+    
+    # Informations montres extraites
+    watch_brand: Optional[str] = None
+    watch_model: Optional[str] = None
+    watch_reference: Optional[str] = None
+    
+    # Informations prix
+    price_mentioned: Optional[float] = None
+    currency: str = 'EUR'
+    price_type: Optional[str] = None
+    
+    # État et caractéristiques
+    condition_mentioned: Optional[str] = None
+    year_mentioned: Optional[int] = None
+    size_mentioned: Optional[str] = None
+    movement_type: Optional[str] = None
+    
+    # Informations vente
+    seller_type: Optional[str] = None
+    location_mentioned: Optional[str] = None
+    shipping_info: Optional[str] = None
+    authenticity_mentioned: bool = False
+    
+    # Métadonnées enrichies
+    extracted_keywords: Optional[List[str]] = None
+    sentiment_score: Optional[float] = None
+    urgency_level: int = 0
+    
+    # JSON pour infos complexes
+    detailed_extraction: Optional[Dict] = None
+    search_metadata: Optional[Dict] = None
 
 class EmbeddingProcessor:
     def __init__(self, supabase_url: str, supabase_key: str, openai_api_key: str):
@@ -132,6 +168,135 @@ class EmbeddingProcessor:
             self.logger.error(f"Erreur lors de la génération d'embedding: {e}")
             return None
     
+    def generate_enhanced_embedding(self, text: str, metadata: Dict = None) -> Optional[List[float]]:
+        """
+        Génère un embedding enrichi avec métadonnées pour améliorer la recherche sémantique
+        
+        Args:
+            text: Texte original à encoder
+            metadata: Métadonnées enrichies (groupes, intentions, etc.)
+            
+        Returns:
+            Vecteur d'embedding enrichi ou None si erreur
+        """
+        try:
+            if not text or text.strip() == "":
+                return None
+            
+            # 🎯 ENRICHISSEMENT DU TEXTE AVEC MÉTADONNÉES
+            enhanced_text = self._create_enhanced_text_for_embedding(text, metadata)
+            
+            # Générer l'embedding sur le texte enrichi
+            response = self.openai_client.embeddings.create(
+                model=self.embedding_model,
+                input=enhanced_text,
+                encoding_format="float"
+            )
+            
+            embedding = response.data[0].embedding
+            
+            if len(embedding) != self.embedding_dimension:
+                self.logger.error(f"Dimension d'embedding incorrecte: {len(embedding)} au lieu de {self.embedding_dimension}")
+                return None
+            
+            self.logger.debug(f"Embedding enrichi généré: {len(embedding)} dimensions")
+            return embedding
+            
+        except Exception as e:
+            self.logger.error(f"Erreur lors de la génération d'embedding enrichi: {e}")
+            # Fallback vers l'embedding standard
+            return self.generate_embedding(text)
+    
+    def _create_enhanced_text_for_embedding(self, original_text: str, metadata: Dict = None) -> str:
+        """
+        Crée un texte enrichi avec les métadonnées pour améliorer l'embedding
+        Inspiré des techniques d'Azure Search et autres systèmes RAG avancés
+        """
+        enhanced_parts = [original_text]
+        
+        if not metadata:
+            return original_text
+        
+        # 🏢 CONTEXTE DE GROUPE
+        if metadata.get('is_group_message'):
+            group_name = metadata.get('sender_profile_name', 'Groupe')
+            enhanced_parts.append(f"[GROUPE: {group_name}]")
+            
+            group_indicators = metadata.get('group_context_indicators', [])
+            if group_indicators:
+                enhanced_parts.append(f"[CONTEXTE: {', '.join(group_indicators[:2])}]")
+        
+        # 👤 CONTEXTE EXPÉDITEUR
+        sender_name = metadata.get('sender_formatted_name') or metadata.get('sender_profile_name')
+        if sender_name:
+            enhanced_parts.append(f"[EXPÉDITEUR: {sender_name}]")
+        
+        # 🎯 INTENTIONS DÉTECTÉES
+        semantic_metadata = metadata.get('semantic_metadata', {})
+        intent_signals = semantic_metadata.get('intent_signals', {})
+        
+        detected_intents = []
+        if intent_signals.get('is_selling'):
+            detected_intents.append('VENTE')
+        if intent_signals.get('is_seeking'):
+            detected_intents.append('RECHERCHE')
+        if intent_signals.get('is_question'):
+            detected_intents.append('QUESTION')
+        if intent_signals.get('has_urgency'):
+            detected_intents.append('URGENT')
+            
+        if detected_intents:
+            enhanced_parts.append(f"[INTENTION: {', '.join(detected_intents)}]")
+        
+        # 📊 CONTEXTE COMMERCIAL
+        text_analysis = semantic_metadata.get('text_analysis', {})
+        commercial_context = []
+        
+        if text_analysis.get('has_price'):
+            commercial_context.append('PRIX')
+        if text_analysis.get('has_phone'):
+            commercial_context.append('CONTACT')
+        if text_analysis.get('has_urls'):
+            commercial_context.append('LIEN')
+            
+        if commercial_context:
+            enhanced_parts.append(f"[COMMERCIAL: {', '.join(commercial_context)}]")
+        
+        # 🌍 CONTEXTE LINGUISTIQUE
+        language_hints = text_analysis.get('language_hints', [])
+        if language_hints:
+            enhanced_parts.append(f"[LANGUE: {language_hints[0].upper()}]")
+        
+        # ⏰ CONTEXTE TEMPOREL
+        timing = semantic_metadata.get('timing', {})
+        if timing.get('is_business_hours'):
+            enhanced_parts.append("[HEURES_OUVRABLES]")
+        
+        # 🔗 CONTEXTE CONVERSATIONNEL
+        conversation = semantic_metadata.get('conversation', {})
+        if conversation.get('is_reply'):
+            enhanced_parts.append("[RÉPONSE]")
+        if conversation.get('has_context'):
+            enhanced_parts.append("[THREAD]")
+        
+        # Combiner tous les éléments
+        enhanced_text = " ".join(enhanced_parts)
+        
+        # Limiter la taille pour éviter les tokens excessifs
+        max_length = 8000  # Limite approximative
+        if len(enhanced_text) > max_length:
+            # Garder le texte original et les métadonnées les plus importantes
+            priority_metadata = []
+            if metadata.get('is_group_message'):
+                priority_metadata.append(f"[GROUPE: {metadata.get('sender_profile_name', 'Groupe')}]")
+            if detected_intents:
+                priority_metadata.append(f"[INTENTION: {detected_intents[0]}]")
+            
+            enhanced_text = original_text + " " + " ".join(priority_metadata)
+            enhanced_text = enhanced_text[:max_length]
+        
+        return enhanced_text
+    
     def generate_embeddings_batch(self, texts: List[str]) -> List[Optional[List[float]]]:
         """
         Génère des embeddings par lot pour optimiser les performances
@@ -179,7 +344,7 @@ class EmbeddingProcessor:
     
     def store_message_embedding(self, message_embedding: MessageEmbedding) -> Optional[Dict]:
         """
-        Stocke un message avec son embedding dans Supabase
+        Stocke un message avec son embedding dans Supabase (table watch_conversations)
         
         Args:
             message_embedding: Objet MessageEmbedding à stocker
@@ -191,15 +356,50 @@ class EmbeddingProcessor:
             data = {
                 'phone_number': message_embedding.phone_number,
                 'message_content': message_embedding.message_content,
-                'timestamp': message_embedding.timestamp,
+                'message_timestamp': message_embedding.message_timestamp,
                 'sender': message_embedding.sender,
                 'embedding': message_embedding.embedding,
                 'is_outgoing': message_embedding.is_outgoing,
-                'media_type': message_embedding.media_type,
-                'content_hash': message_embedding.content_hash
+                'content_hash': message_embedding.content_hash,
+                
+                # 🕰️ NOUVELLES DONNÉES MONTRES
+                'group_name': message_embedding.group_name,
+                'message_type': message_embedding.message_type,
+                'intent_score': message_embedding.intent_score,
+                
+                # Informations montres extraites
+                'watch_brand': message_embedding.watch_brand,
+                'watch_model': message_embedding.watch_model,
+                'watch_reference': message_embedding.watch_reference,
+                
+                # Informations prix
+                'price_mentioned': message_embedding.price_mentioned,
+                'currency': message_embedding.currency,
+                'price_type': message_embedding.price_type,
+                
+                # État et caractéristiques
+                'condition_mentioned': message_embedding.condition_mentioned,
+                'year_mentioned': message_embedding.year_mentioned,
+                'size_mentioned': message_embedding.size_mentioned,
+                'movement_type': message_embedding.movement_type,
+                
+                # Informations vente
+                'seller_type': message_embedding.seller_type,
+                'location_mentioned': message_embedding.location_mentioned,
+                'shipping_info': message_embedding.shipping_info,
+                'authenticity_mentioned': message_embedding.authenticity_mentioned,
+                
+                # Métadonnées enrichies
+                'extracted_keywords': message_embedding.extracted_keywords,
+                'sentiment_score': message_embedding.sentiment_score,
+                'urgency_level': message_embedding.urgency_level,
+                
+                # JSON pour infos complexes
+                'detailed_extraction': message_embedding.detailed_extraction or {},
+                'search_metadata': message_embedding.search_metadata or {}
             }
             
-            result = self.supabase.table('conversations').insert(data).execute()
+            result = self.supabase.table('watch_conversations').insert(data).execute()
             
             if result.data:
                 self.logger.debug(f"Message stocké avec ID: {result.data[0].get('id')}")
@@ -231,16 +431,39 @@ class EmbeddingProcessor:
                 data = {
                     'phone_number': msg_emb.phone_number,
                     'message_content': msg_emb.message_content,
-                    'timestamp': msg_emb.timestamp,
+                    'message_timestamp': msg_emb.message_timestamp,
                     'sender': msg_emb.sender,
                     'embedding': msg_emb.embedding,
                     'is_outgoing': msg_emb.is_outgoing,
-                    'media_type': msg_emb.media_type,
-                    'content_hash': msg_emb.content_hash
+                    'content_hash': msg_emb.content_hash,
+                    
+                    # 🕰️ NOUVELLES DONNÉES MONTRES (même structure que store_message_embedding)
+                    'group_name': msg_emb.group_name,
+                    'message_type': msg_emb.message_type,
+                    'intent_score': msg_emb.intent_score,
+                    'watch_brand': msg_emb.watch_brand,
+                    'watch_model': msg_emb.watch_model,
+                    'watch_reference': msg_emb.watch_reference,
+                    'price_mentioned': msg_emb.price_mentioned,
+                    'currency': msg_emb.currency,
+                    'price_type': msg_emb.price_type,
+                    'condition_mentioned': msg_emb.condition_mentioned,
+                    'year_mentioned': msg_emb.year_mentioned,
+                    'size_mentioned': msg_emb.size_mentioned,
+                    'movement_type': msg_emb.movement_type,
+                    'seller_type': msg_emb.seller_type,
+                    'location_mentioned': msg_emb.location_mentioned,
+                    'shipping_info': msg_emb.shipping_info,
+                    'authenticity_mentioned': msg_emb.authenticity_mentioned,
+                    'extracted_keywords': msg_emb.extracted_keywords,
+                    'sentiment_score': msg_emb.sentiment_score,
+                    'urgency_level': msg_emb.urgency_level,
+                    'detailed_extraction': msg_emb.detailed_extraction or {},
+                    'search_metadata': msg_emb.search_metadata or {}
                 }
                 data_list.append(data)
             
-            result = self.supabase.table('conversations').insert(data_list).execute()
+            result = self.supabase.table('watch_conversations').insert(data_list).execute()
             
             if result.data:
                 self.logger.info(f"Lot de {len(result.data)} messages stocké avec succès")
@@ -264,7 +487,7 @@ class EmbeddingProcessor:
             Set des hash de contenu déjà existants
         """
         try:
-            result = self.supabase.table('conversations')\
+            result = self.supabase.table('watch_conversations')\
                 .select('content_hash')\
                 .eq('phone_number', phone_number)\
                 .execute()
@@ -450,7 +673,7 @@ class EmbeddingProcessor:
             Dictionnaire avec les statistiques
         """
         try:
-            result = self.supabase.table('conversations')\
+            result = self.supabase.table('watch_conversations')\
                 .select('id, timestamp, sender, is_outgoing')\
                 .eq('phone_number', phone_number)\
                 .execute()
@@ -487,7 +710,7 @@ class EmbeddingProcessor:
             True si succès, False sinon
         """
         try:
-            result = self.supabase.table('conversations')\
+            result = self.supabase.table('watch_conversations')\
                 .delete()\
                 .eq('phone_number', phone_number)\
                 .execute()
@@ -518,7 +741,7 @@ class EmbeddingProcessor:
         """
         try:
             # Supprimer les messages avec contenu vide ou embedding null
-            result = self.supabase.table('conversations')\
+            result = self.supabase.table('watch_conversations')\
                 .delete()\
                 .or_("message_content.is.null,message_content.eq.'',embedding.is.null")\
                 .execute()
